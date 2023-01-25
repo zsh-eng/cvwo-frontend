@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react'
-import { Button, Image, HStack, Box } from '@chakra-ui/react'
+import { Button, Image, HStack, Box, Spacer } from '@chakra-ui/react'
 import logo from '../assets/logo.png'
 
 interface LinkProps {
@@ -12,14 +12,25 @@ function navigate() {
 }
 
 function Link({ children, onClick }: LinkProps) {
-  return <Button onClick={onClick}>{children}</Button>
+  return (
+    <Button onClick={onClick} colorScheme="facebook">
+      {children}
+    </Button>
+  )
 }
 
-export default function Header() {
+interface HeaderProps {
+  login: () => void
+}
+
+export default function Header({ login }: HeaderProps) {
   return (
-    <HStack h="100px">
-      <Image src={logo} h="50px" />
-      <Link onClick={navigate}>Hello</Link>
+    <HStack px={12} pt={4}>
+      <Image src={logo} h={12} mr={4} />
+      <Link onClick={navigate}>Home</Link>
+      <Link onClick={navigate}>About</Link>
+      <Spacer />
+      <Link onClick={login}>Login</Link>
     </HStack>
   )
 }

@@ -1,34 +1,54 @@
-import {
-  Flex,
-  Box,
-  Heading,
-  Text,
-  Image,
-  Center,
-  VStack
-} from '@chakra-ui/react'
-import wave from '../assets/wave-haikei.svg'
-import engineer from '../assets/engineer.svg'
+import { useState, useCallback } from 'react'
+import { useImmer } from 'use-immer'
+import { Box, useDisclosure } from '@chakra-ui/react'
 import Header from './Header'
+import LandingPage from './LandingPage'
+import LoginModal from './LoginModal'
+
+interface LoginDetails {
+  username: string
+  password: string
+  repeatPassword: string
+}
 
 function App() {
+  // For controlling the login modal screen in Header
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [loginDetails, setLoginDetails] = useImmer<LoginDetails>({
+    username: '',
+    password: '',
+    repeatPassword: ''
+  })
+
+  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoginDetails((draft) => {
+      if (draft !== undefined) {
+        switch (e.target.name) {
+          case 'username':
+            draft.username = e.target.value
+            break
+          case 'password':
+            draft.password = e.target.value
+            break
+          case 'repeatPassword':
+            draft.repeatPassword = e.target.value
+            break
+          default:
+        }
+      }
+    })
+  }
+
   return (
-    <Box maxW="full" h="100vh" bg="blue.100" bgImage={wave} bgSize="cover">
-      <Header />
-      <Center h="full">
-        <Flex justify="center">
-          <Box maxW="md">
-            <Heading fontSize="6xl">
-              Singapore&#39;s{' '}
-              <Text w="min-content" color="blue.700">
-                largest
-              </Text>{' '}
-              network for university students
-            </Heading>
-          </Box>
-          <Image src={engineer} w="2xl" />
-        </Flex>
-      </Center>
+    <Box maxW="full" h="100vh" bg="blue.100">
+      <Header login={onOpen} />
+      <LandingPage />
+      <LoginModal
+        onClose={onClose}
+        isOpen={isOpen}
+        onChange={handleLoginChange}
+        loginDetails={loginDetails}
+      />
     </Box>
   )
 }
