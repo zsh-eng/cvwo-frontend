@@ -25,7 +25,7 @@ interface HeaderProps {
 
 export default function Header({ login }: HeaderProps) {
   return (
-    <HStack px={12} pt={4}>
+    <HStack px={12} py={4} bg="cyan">
       <Image src={logo} h={12} mr={4} />
       <Link onClick={navigate}>Home</Link>
       <Link onClick={navigate}>About</Link>
