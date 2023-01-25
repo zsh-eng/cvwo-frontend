@@ -21,16 +21,25 @@ function Link({ children, onClick }: LinkProps) {
 
 interface HeaderProps {
   login: () => void
+  loggedIn: boolean
 }
 
-export default function Header({ login }: HeaderProps) {
+export default function Header({ login, loggedIn }: HeaderProps) {
   return (
-    <HStack px={12} py={4} bg="cyan">
+    <HStack px={12} py={4} bg="cyan" spacing={8}>
       <Image src={logo} h={12} mr={4} />
-      <Link onClick={navigate}>Home</Link>
-      <Link onClick={navigate}>About</Link>
+      <Button onClick={navigate} variant="link">
+        Home
+      </Button>
+      <Button onClick={navigate} variant="link">
+        About
+      </Button>
       <Spacer />
-      <Link onClick={login}>Login</Link>
+      {loggedIn && (
+        <Button colorScheme="facebook" onClick={login}>
+          Login
+        </Button>
+      )}
     </HStack>
   )
 }
