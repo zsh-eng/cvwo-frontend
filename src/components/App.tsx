@@ -9,14 +9,18 @@ function App() {
   // For controlling the login modal screen in Header
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  // Display landing page if not logged in.
-  // Display forum posts if logged in
-  const [loggedIn, setLoggedIn] = useBoolean(true)
+  // Displays Homepage
+  // NOTE: Add React Router if time permits
+  const [isHome, setIsHome] = useBoolean(true)
 
   return (
     <Box maxW="full" h="full" pb={8}>
-      <Header login={onOpen} loggedIn={loggedIn} />
-      {loggedIn ? <Forum /> : <LandingPage />}
+      <Header
+        login={onOpen}
+        navigateHome={setIsHome.on}
+        navigatePosts={setIsHome.off}
+      />
+      {!isHome ? <Forum /> : <LandingPage />}
       <LoginModal onClose={onClose} isOpen={isOpen} />
     </Box>
   )

@@ -13,7 +13,7 @@ import engineer from '../assets/engineer.svg'
 export default function LandingPage() {
   return (
     <Container maxW="full" h="80%" p={0}>
-      <Center h="full">
+      <Center h="full" mt={32}>
         <Flex justify="center">
           <Box maxW="md">
             <Heading fontSize="6xl">
