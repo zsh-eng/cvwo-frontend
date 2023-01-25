@@ -14,6 +14,7 @@ import {
   TagLabel
 } from '@chakra-ui/react'
 import { formatDistanceToNow } from 'date-fns'
+import { FaBook } from 'react-icons/fa'
 
 interface ForumPostContent {
   title: string
@@ -52,7 +53,7 @@ export default function ForumPost({ content }: { content: ForumPostContent }) {
         <CardFooter>
           <Flex w="full">
             <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-              <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+              <Avatar name={author} src="https://bit.ly/broken-link" />
               <Box>
                 <Heading size="sm">{author}</Heading>
                 <Text fontSize="sm" color="gray">
@@ -62,9 +63,9 @@ export default function ForumPost({ content }: { content: ForumPostContent }) {
             </Flex>
             <Flex justifySelf="flex-end" gap={4}>
               {tags.map((tag) => (
-                <Tag size="lg" key={tag} variant="solid" colorScheme="teal">
-                  {/* <TagLeftIcon /> */}
-                  <TagLabel>{tag}</TagLabel>
+                <Tag key={tag} size="lg" variant="solid" colorScheme="blue">
+                  <TagLeftIcon as={FaBook} />
+                  <TagLabel>Modules</TagLabel>
                 </Tag>
               ))}
             </Flex>

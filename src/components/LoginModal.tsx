@@ -96,6 +96,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     <FormControl
       isInvalid={formik.touched.username && Boolean(formik.errors.username)}
     >
+      <FormErrorMessage>
+        {formik.touched.username && formik.errors.username}
+      </FormErrorMessage>
       <Input
         id="username"
         name="username"
@@ -104,15 +107,15 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
         onChange={formik.handleChange}
         mb={2}
       />
-      <FormErrorMessage>
-        {formik.touched.username && formik.errors.username}
-      </FormErrorMessage>
     </FormControl>
   )
   const PasswordInput = (
     <FormControl
       isInvalid={formik.touched.password && Boolean(formik.errors.password)}
     >
+      <FormErrorMessage>
+        {formik.touched.password && formik.errors.password}
+      </FormErrorMessage>
       <InputGroup>
         <Input
           id="password"
@@ -129,9 +132,6 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           </Button>
         </InputRightElement>
       </InputGroup>
-      <FormErrorMessage>
-        {formik.touched.password && formik.errors.password}
-      </FormErrorMessage>
     </FormControl>
   )
   const ConfirmPasswordInput = (

@@ -37,25 +37,55 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import axios from 'axios'
 
-const testPost = {
-  title: 'Should I take GEA1000N or DSA1101?',
-  body: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, doloribus.
-    Quae qui ad dolore assumenda praesentium reprehenderit porro hic ab,
-    cupiditate sequi similique eius reiciendis quasi aliquam et, earum
-    laboriosam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, doloribus.
-    Quae qui ad dolore assumenda praesentium reprehenderit porro hic ab,
-    cupiditate sequi similique eius reiciendis quasi aliquam et, earum
-    laboriosam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, doloribus.
-    Quae qui ad dolore assumenda praesentium reprehenderit porro hic ab,
-    cupiditate sequi similique eius reiciendis quasi aliquam et, earum
-    laboriosam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, doloribus.
-    Quae qui ad dolore assumenda praesentium reprehenderit porro hic ab,
-    cupiditate sequi similique eius reiciendis quasi aliquam et, earum
-    laboriosam!`,
-  author: 'John Smith',
-  date: new Date(),
-  tags: ['Modules', 'School', 'Question']
-}
+import { LoremIpsum } from 'lorem-ipsum'
+// For generating test posts
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 4
+  }
+})
+
+const testPosts = [
+  {
+    author: 'John Smith',
+    id: 1,
+    date: new Date(),
+    tags: ['Modules']
+  },
+  {
+    author: 'Anthony Tan',
+    id: 2,
+    date: new Date(),
+    tags: ['CCAs']
+  },
+  {
+    author: 'May Flower',
+    id: 3,
+    date: new Date(),
+    tags: ['Off-topic']
+  },
+  {
+    author: 'Samantha Ong',
+    id: 4,
+    date: new Date(),
+    tags: ['School']
+  },
+  {
+    author: 'Wong Kar Wai',
+    id: 5,
+    date: new Date(),
+    tags: ['Questions']
+  }
+].map((post) => ({
+  ...post,
+  title: lorem.generateSentences(1),
+  body: lorem.generateParagraphs(2)
+}))
 
 interface PostValues {
   title: string
@@ -236,10 +266,9 @@ export default function Forum() {
       <HStack>
         <Sidebar />
         <VStack flexGrow={1}>
-          <ForumPost content={testPost} />
-          <ForumPost content={testPost} />
-          <ForumPost content={testPost} />
-          <ForumPost content={testPost} />
+          {testPosts.map((post) => (
+            <ForumPost key={post.id} content={post} />
+          ))}
         </VStack>
       </HStack>
     </Container>
