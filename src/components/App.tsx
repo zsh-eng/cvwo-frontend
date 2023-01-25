@@ -1,4 +1,3 @@
-import { useState, useCallback } from 'react'
 import { useImmer } from 'use-immer'
 import { Box, useDisclosure } from '@chakra-ui/react'
 import Header from './Header'

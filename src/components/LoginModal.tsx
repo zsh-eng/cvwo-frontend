@@ -9,7 +9,6 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalFooter,
   ModalBody,
   ModalCloseButton
@@ -25,25 +24,6 @@ interface LoginModalProps {
     password: string
     repeatPassword: string
   }
-}
-
-interface PasswordInputProps {
-  visible: boolean
-  toggle: () => void
-  placeholder: string
-}
-
-function PasswordInput({ visible, toggle, placeholder }: PasswordInputProps) {
-  return (
-    <InputGroup>
-      <Input placeholder={placeholder} type={visible ? 'text' : 'password'} />
-      <InputRightElement>
-        <Button variant="ghost" onClick={toggle} mr={6}>
-          {visible ? 'Hide' : 'Show'}
-        </Button>
-      </InputRightElement>
-    </InputGroup>
-  )
 }
 
 export default function LoginModal({
